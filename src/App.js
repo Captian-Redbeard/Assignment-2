@@ -103,7 +103,7 @@ text-green-600"
         <div className="px-6 py-4">
           <h1 className="text-3xl mb-2 font-bold text-white">
             {" "}
-            Product Catalog App
+            Assignment 02: Store Cart
           </h1>
           <p className="text-gray-700 text-white">
             by -{" "}
@@ -128,6 +128,11 @@ text-green-600"
           <div className="py-10">
             <input type="search" value={query} onChange={handleChange} />
           </div>
+          <div className = "py-10"> 
+
+
+<button class="white-button">Checkout</button>
+ </div>
         </div>
       </div>
       <div className="ml-5 p-10 xl:basis-4/5">
