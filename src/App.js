@@ -33,7 +33,7 @@ overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none"
               >
                 <img
                   alt="Product Image"
-                  src={product.image}
+                  src="./images/cat1.jpg"
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"/>
               </div>
               <div className="flex justify-between p-3">
@@ -103,7 +103,7 @@ text-green-600"
         <div className="px-6 py-4">
           <h1 className="text-3xl mb-2 font-bold text-white">
             {" "}
-            Product Catalog App
+            Product Catalog App1
           </h1>
           <p className="text-gray-700 text-white">
             by -{" "}
