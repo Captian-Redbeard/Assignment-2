@@ -1,6 +1,4 @@
 
-
-
 // //Add your code under this line
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 const form = document.getElementById('checkout-form')
