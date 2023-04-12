@@ -34,9 +34,7 @@ overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none"
                 <img
                   alt="Product Image"
                   src={product.image}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-
-full"
-                />
+                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"/>
               </div>
               <div className="flex justify-between p-3">
                 <div>
@@ -101,7 +99,7 @@ text-green-600"
         className="h-screen bg-slate-800 p-3 xl:basis-1/5"
         style={{ minWidth: "65%" }}
       >
-        <img className="w-full" src={logo} alt="Sunset in the mountains" />
+        <img className="w-full" src={logo} alt="Sunset in the mountains" width={300} height={400} />
         <div className="px-6 py-4">
           <h1 className="text-3xl mb-2 font-bold text-white">
             {" "}
