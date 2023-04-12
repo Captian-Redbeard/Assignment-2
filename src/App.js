@@ -99,7 +99,7 @@ text-green-600"
         className="h-screen bg-slate-800 p-3 xl:basis-1/5"
         style={{ minWidth: "65%" }}
       >
-        <img className="w-full" src={logo} alt="Sunset in the mountains" width={300} height={400} />
+        <img style={{borderRadius: "10px"}} src={logo} alt="Sunset in the mountains" width={450} height={600} />
         <div className="px-6 py-4">
           <h1 className="text-3xl mb-2 font-bold text-white">
             {" "}
