@@ -111,7 +111,7 @@ text-green-600"
              Kyle Kohl: Software Engineer & Spencer Theile: Software Engineer
             </b>
           </p>
-          <div className="py-10">
+          <div className="py-5">
             {Categories ? <p className="text-white">Tags : </p> : ""}
             {Categories.map((tag) => (
               <button
@@ -125,7 +125,7 @@ text-green-600"
               </button>
             ))}
           </div>
-          <div className="py-10">
+          <div className="py-1">
             <input type="search" value={query} onChange={handleChange} />
           </div>
         </div>
