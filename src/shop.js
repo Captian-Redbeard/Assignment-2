@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import items from "./ForTesting.json";
-
-export const Shop = () => {
+import items from "./Cats.json";
+const Shop = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     
@@ -43,21 +42,14 @@ export const Shop = () => {
     </div>
   ));
 
-  const render_shop = () => {
-    return (
-      <div>
-        {" "}
-        {listItems}
-        <div>Itesm in Cart :</div>
-        <div>{cartItems}</div>
-        <div>Order total to pay :{cartTotal}</div>
-      </div>
-    );
-  }
-
   return (
     <div>
-      render_shop();
+      {" "}
+      {listItems}
+      <div>Itesm in Cart :</div>
+      <div>{cartItems}</div>
+      <div>Order total to pay :{cartTotal}</div>
     </div>
   );
 };
+export default Shop;

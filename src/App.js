@@ -3,7 +3,7 @@ import logo from "./logo.png";
 import React, { useState } from "react";
 import { Products } from "./Products";
 import { Categories } from "./Categories";
-import { Shop } from "./Shop";
+import Shop from "./Shop";
 export const App = () => {
 
   console.log("Step 1: After reading file :");
@@ -195,7 +195,6 @@ export const App = () => {
   {
     return (
       <div>
-      {Shop}
       </div>
       );
   }
