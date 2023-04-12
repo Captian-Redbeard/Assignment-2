@@ -1,4 +1,3 @@
-
 import "./App.css";
 import logo from "./logo.png";
 import React, { useState } from "react";
@@ -34,7 +33,7 @@ overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none"
                 <img
                   alt="Product Image"
                   src={product.image}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"/>
+                    />
               </div>
               <div className="flex justify-between p-3">
                 <div>
@@ -72,6 +71,13 @@ text-green-600"
     // ProductsCategory = filtered;
     console.log("Step 5 : ", Products.length, ProductsCategory.length);
   }
+  function takeToValidation() {
+    window.location.href = "FormValidation.html";
+    setTimeout(() => {
+      console.log("Delayed message!");
+    }, 10000);
+    
+  }
   const handleChange = (e) => {
     setQuery(e.target.value);
     console.log(
@@ -99,7 +105,13 @@ text-green-600"
         className="h-screen bg-slate-800 p-3 xl:basis-1/5"
         style={{ minWidth: "65%" }}
       >
-        <img style={{borderRadius: "10px"}} src={logo} alt="Sunset in the mountains" width={450} height={600} />
+        <img
+          style={{ borderRadius: "10px" }}
+          src={logo}
+          alt="Sunset in the mountains"
+          width={450}
+          height={600}
+        />
         <div className="px-6 py-4">
           <h1 className="text-3xl mb-2 font-bold text-white">
             {" "}
@@ -108,10 +120,10 @@ text-green-600"
           <p className="text-gray-700 text-white">
             by -{" "}
             <b style={{ color: "orange" }}>
-             Kyle Kohl: Software Engineer & Spencer Theile: Software Engineer
+              Kyle Kohl: Software Engineer & Spencer Theile: Software Engineer
             </b>
           </p>
-          <div className="py-5">
+          <div className="py-10">
             {Categories ? <p className="text-white">Tags : </p> : ""}
             {Categories.map((tag) => (
               <button
@@ -125,14 +137,19 @@ text-green-600"
               </button>
             ))}
           </div>
-          <div className="py-1">
+          <div className="py-10">
             <input type="search" value={query} onChange={handleChange} />
           </div>
-          <div className = "py-10"> 
-
-
-<button class="white-button">Checkout</button>
- </div>
+          <div className="py-10">
+            <button
+              class="white-button"
+              onClick={() => {
+                takeToValidation();
+              }}
+            >
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
       <div className="ml-5 p-10 xl:basis-4/5">
