@@ -1,19 +1,109 @@
 import "./App.css";
 import logo from "./logo.png";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import items from "./Cats.json";
 import { Products } from "./Products";
 import { Categories } from "./Categories";
+<<<<<<< HEAD
 import Shop from "./shop";
+=======
+
+>>>>>>> d7c06e9d7d5604421fbe2a13c62f3d5bd9821d7e
 export const App = () => {
 
   console.log("Step 1: After reading file :");
   const [ProductsCategory, setProductsCategory] = useState(Products);
   const [query, setQuery] = useState("");
   const [view, setView] = useState(1);
-  var viewState = 2;
-  // var ProductsCategory = Products;
+  const [ProductsUnfiltered, setProductsUnfiltered] = useState(Products);
+  const [cart, setCart] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+  
 
 
+  //SHOP FUNCTIONS
+  useEffect(() => {
+    total();
+  }, [cart]);
+  
+  const total = () => {
+    let totalVal = 0;
+    for (let i = 0; i < cart.length; i++) {
+      totalVal += cart[i].price;
+    }
+    setCartTotal(totalVal);
+  };
+  
+  const addToCart = (el) => {
+    setCart([...cart, el]);
+  };
+  const removeFromCart = (el) => {
+    let hardCopy = [...cart];
+    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
+    setCart(hardCopy);
+  };
+  
+  const cartItems = cart.map((el) => (
+    <div key={el.id}>
+      <img class="img-fluid" src={el.image} width={30} />
+      {el.title}${el.price}
+    </div>
+  ));
+  const listItems = items.map((el) => (
+    <div key={el.id}>
+      <img class="img-fluid" src={el.image} width = {100} />
+      {el.title}
+      {el.category}
+      {el.price}
+      <button type="button" onClick={() => removeFromCart(el)}>-</button>{" "}
+      <button type="button" variant="light" onClick={() => addToCart(el)}>{" "}+{" "}</button>
+    </div>
+  ));
+  //--------------------------
+
+  
+  //APP Functions
+  function handleClick(tag) {
+    console.log("Step 4 : in handleClick", tag);
+    let filtered = Products.filter((cat) => cat.category === tag);
+    setProductsCategory(filtered);
+    // ProductsCategory = filtered;
+    console.log("Step 5 : ", Products.length, ProductsCategory.length);
+  }
+
+  function clearFilter() {
+    setProductsCategory(ProductsUnfiltered);
+    setQuery("");
+  }
+
+
+  function takeToValidation() {
+    window.location.href = "FormValidation.html";
+    setTimeout(() => {
+      console.log("Delayed message!");
+    }, 10000);
+    
+  }
+
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+    console.log(
+      "Step 6 : in handleChange, Target Value :",
+      e.target.value,
+      " QueryValue :",
+      query
+    );
+    const results = ProductsCategory.filter((eachProduct) => {
+      if (e.target.value === "") return ProductsCategory;
+      return eachProduct.title
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
+    });
+    setProductsCategory(results);
+  };
+
+  //Renders
   const render_products = (ProductsCategory) => {
     return (
       <div className="category-section fixed">
@@ -67,42 +157,17 @@ export const App = () => {
     );
   };
 
-
-  function handleClick(tag) {
-    console.log("Step 4 : in handleClick", tag);
-    let filtered = Products.filter((cat) => cat.category === tag);
-    setProductsCategory(filtered);
-    // ProductsCategory = filtered;
-    console.log("Step 5 : ", Products.length, ProductsCategory.length);
-  }
-
-
-  function takeToValidation() {
-    window.location.href = "FormValidation.html";
-    setTimeout(() => {
-      console.log("Delayed message!");
-    }, 10000);
-    
-  }
-
-
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-    console.log(
-      "Step 6 : in handleChange, Target Value :",
-      e.target.value,
-      " QueryValue :",
-      query
+  const render_shop = () => {
+    return (
+      <div>
+        {" "}
+        {listItems}
+        <div>Itesm in Cart :</div>
+        <div>{cartItems}</div>
+        <div>Order total to pay :{cartTotal}</div>
+      </div>
     );
-    const results = ProductsCategory.filter((eachProduct) => {
-      if (e.target.value === "") return ProductsCategory;
-      return eachProduct.title
-        .toLowerCase()
-        .includes(e.target.value.toLowerCase());
-    });
-    setProductsCategory(results);
-  };
-
+    }
 
   const render_app = () => {
     return (
@@ -134,7 +199,17 @@ export const App = () => {
                 Kyle Kohl: Software Engineer & Spencer Theile: Software Engineer
               </b>
             </p>
-            <div className="py-10">
+            <div className="py-5">
+            <button
+                class="gray-button-small"
+                onClick={() => {
+                  clearFilter();
+                }}
+              >
+                Clear Filters
+              </button>
+            </div>
+            <div className="">
               {Categories ? <p className="text-white">Tags : </p> : ""}
               {Categories.map((tag) => (
                 <button
@@ -148,15 +223,15 @@ export const App = () => {
                 </button>
               ))}
             </div>
-            <div className="py-10">
+            <div className="py-5">
               <input type="search" value={query} onChange={handleChange} />
             </div>
-            <div className="py-10">
+            <div className="py-10 px-2">
               <button
                 class="white-button"
                 onClick={() => {
                   //takeToValidation();
-                  setView(0);
+                  setView(2);
                 }}
               >
                 Checkout
@@ -176,7 +251,9 @@ export const App = () => {
     );
   }
 
-  console.log(view);
+
+
+  //Render Choice
   if(view == 0)
   {
     return (
@@ -195,6 +272,7 @@ export const App = () => {
   {
     return (
       <div>
+        {render_shop()}
       </div>
       );
   }
