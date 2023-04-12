@@ -11,9 +11,10 @@ export const App = () => {
   const [ProductsCategory, setProductsCategory] = useState(Products);
   const [query, setQuery] = useState("");
   const [view, setView] = useState(1);
+  const [ProductsUnfiltered, setProductsUnfiltered] = useState(Products);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-  // var ProductsCategory = Products;
+  
 
 
   //SHOP FUNCTIONS
@@ -58,6 +59,47 @@ export const App = () => {
 
   
   //APP Functions
+  function handleClick(tag) {
+    console.log("Step 4 : in handleClick", tag);
+    let filtered = Products.filter((cat) => cat.category === tag);
+    setProductsCategory(filtered);
+    // ProductsCategory = filtered;
+    console.log("Step 5 : ", Products.length, ProductsCategory.length);
+  }
+
+  function clearFilter() {
+    setProductsCategory(ProductsUnfiltered);
+    setQuery("");
+  }
+
+
+  function takeToValidation() {
+    window.location.href = "FormValidation.html";
+    setTimeout(() => {
+      console.log("Delayed message!");
+    }, 10000);
+    
+  }
+
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+    console.log(
+      "Step 6 : in handleChange, Target Value :",
+      e.target.value,
+      " QueryValue :",
+      query
+    );
+    const results = ProductsCategory.filter((eachProduct) => {
+      if (e.target.value === "") return ProductsCategory;
+      return eachProduct.title
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
+    });
+    setProductsCategory(results);
+  };
+
+  //Renders
   const render_products = (ProductsCategory) => {
     return (
       <div className="category-section fixed">
@@ -111,43 +153,6 @@ export const App = () => {
     );
   };
 
-
-  function handleClick(tag) {
-    console.log("Step 4 : in handleClick", tag);
-    let filtered = Products.filter((cat) => cat.category === tag);
-    setProductsCategory(filtered);
-    // ProductsCategory = filtered;
-    console.log("Step 5 : ", Products.length, ProductsCategory.length);
-  }
-
-
-  function takeToValidation() {
-    window.location.href = "FormValidation.html";
-    setTimeout(() => {
-      console.log("Delayed message!");
-    }, 10000);
-    
-  }
-
-
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-    console.log(
-      "Step 6 : in handleChange, Target Value :",
-      e.target.value,
-      " QueryValue :",
-      query
-    );
-    const results = ProductsCategory.filter((eachProduct) => {
-      if (e.target.value === "") return ProductsCategory;
-      return eachProduct.title
-        .toLowerCase()
-        .includes(e.target.value.toLowerCase());
-    });
-    setProductsCategory(results);
-  };
-
-  //Renders
   const render_shop = () => {
     return (
       <div>
@@ -190,7 +195,17 @@ export const App = () => {
                 Kyle Kohl: Software Engineer & Spencer Theile: Software Engineer
               </b>
             </p>
-            <div className="py-10">
+            <div className="py-5">
+            <button
+                class="gray-button-small"
+                onClick={() => {
+                  clearFilter();
+                }}
+              >
+                Clear Filters
+              </button>
+            </div>
+            <div className="">
               {Categories ? <p className="text-white">Tags : </p> : ""}
               {Categories.map((tag) => (
                 <button
@@ -204,10 +219,10 @@ export const App = () => {
                 </button>
               ))}
             </div>
-            <div className="py-10">
+            <div className="py-5">
               <input type="search" value={query} onChange={handleChange} />
             </div>
-            <div className="py-10">
+            <div className="py-10 px-2">
               <button
                 class="white-button"
                 onClick={() => {
@@ -232,7 +247,9 @@ export const App = () => {
     );
   }
 
-  console.log(view);
+
+
+  //Render Choice
   if(view == 0)
   {
     return (
