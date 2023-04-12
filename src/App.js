@@ -3,32 +3,35 @@ import logo from "./logo.png";
 import React, { useState } from "react";
 import { Products } from "./Products";
 import { Categories } from "./Categories";
+import { Shop } from "./Shop";
 export const App = () => {
+
   console.log("Step 1: After reading file :");
   const [ProductsCategory, setProductsCategory] = useState(Products);
   const [query, setQuery] = useState("");
+  const [view, setView] = useState(1);
+  var viewState = 2;
   // var ProductsCategory = Products;
+
+
   const render_products = (ProductsCategory) => {
     return (
       <div className="category-section fixed">
         {console.log("Step 3 : in render_products ")}
         <h2
-          className="text-3xl font-extrabold tracking-tight text-gray-600 category-
-title"
+          className="text-3xl font-extrabold tracking-tight text-gray-600 category-title"
         >
           Products ({ProductsCategory.length})
         </h2>
         <div
-          className="m-6 p-3 mt-10 ml-0 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-
-cols-2 lg:grid-cols-6 xl:gap-x-10"
+          className="m-6 p-3 mt-10 ml-0 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-10"
           style={{ maxHeight: "800px", overflowY: "scroll" }}
         >
           {/* Loop Products */}
           {ProductsCategory.map((product, index) => (
             <div key={index} className="group relative shadow-lg">
               <div
-                className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md
-overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none"
+                className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none"
               >
                 <img
                   alt="Product Image"
@@ -52,8 +55,7 @@ overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none"
                   </p>
                 </div>
                 <p
-                  className="text-sm font-medium
-text-green-600"
+                  className="text-sm font-medium text-green-600"
                 >
                   ${product.price}
                 </p>
@@ -64,6 +66,8 @@ text-green-600"
       </div>
     );
   };
+
+
   function handleClick(tag) {
     console.log("Step 4 : in handleClick", tag);
     let filtered = Products.filter((cat) => cat.category === tag);
@@ -71,6 +75,8 @@ text-green-600"
     // ProductsCategory = filtered;
     console.log("Step 5 : ", Products.length, ProductsCategory.length);
   }
+
+
   function takeToValidation() {
     window.location.href = "FormValidation.html";
     setTimeout(() => {
@@ -78,6 +84,8 @@ text-green-600"
     }, 10000);
     
   }
+
+
   const handleChange = (e) => {
     setQuery(e.target.value);
     console.log(
@@ -94,72 +102,102 @@ text-green-600"
     });
     setProductsCategory(results);
   };
-  return (
-    <div className="flex fixed flex-row">
-      {console.log(
-        "Step 2 : ReturnApp :",
-        Products.length,
-        ProductsCategory.length
-      )}
-      <div
-        className="h-screen bg-slate-800 p-3 xl:basis-1/5"
-        style={{ minWidth: "65%" }}
-      >
-        <img
-          style={{ borderRadius: "10px" }}
-          src={logo}
-          alt="Sunset in the mountains"
-          width={450}
-          height={600}
-        />
-        <div className="px-6 py-4">
-          <h1 className="text-3xl mb-2 font-bold text-white">
-            {" "}
-            Assignment 02: Store Cart
-          </h1>
-          <p className="text-gray-700 text-white">
-            by -{" "}
-            <b style={{ color: "orange" }}>
-              Kyle Kohl: Software Engineer & Spencer Theile: Software Engineer
-            </b>
-          </p>
-          <div className="py-10">
-            {Categories ? <p className="text-white">Tags : </p> : ""}
-            {Categories.map((tag) => (
-              <button
-                key={tag}
-                className="inline-block bg-amber-600 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-2"
-                onClick={() => {
-                  handleClick(tag);
-                }}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-          <div className="py-10">
-            <input type="search" value={query} onChange={handleChange} />
-          </div>
-          <div className="py-10">
-            <button
-              class="white-button"
-              onClick={() => {
-                takeToValidation();
-              }}
-            >
-              Checkout
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="ml-5 p-10 xl:basis-4/5">
+
+
+  const render_app = () => {
+    return (
+      <div className="flex fixed flex-row">
         {console.log(
-          "Before render :",
+          "Step 2 : ReturnApp :",
           Products.length,
           ProductsCategory.length
         )}
-        {render_products(ProductsCategory)}
+        <div
+          className="h-screen bg-slate-800 p-3 xl:basis-1/5"
+          style={{ minWidth: "65%" }}
+        >
+          <img
+            style={{ borderRadius: "10px" }}
+            src={logo}
+            alt="Sunset in the mountains"
+            width={450}
+            height={600}
+          />
+          <div className="px-6 py-4">
+            <h1 className="text-3xl mb-2 font-bold text-white">
+              {" "}
+              Assignment 02: Store Cart
+            </h1>
+            <p className="text-gray-700 text-white">
+              by -{" "}
+              <b style={{ color: "orange" }}>
+                Kyle Kohl: Software Engineer & Spencer Theile: Software Engineer
+              </b>
+            </p>
+            <div className="py-10">
+              {Categories ? <p className="text-white">Tags : </p> : ""}
+              {Categories.map((tag) => (
+                <button
+                  key={tag}
+                  className="inline-block bg-amber-600 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-2"
+                  onClick={() => {
+                    handleClick(tag);
+                  }}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+            <div className="py-10">
+              <input type="search" value={query} onChange={handleChange} />
+            </div>
+            <div className="py-10">
+              <button
+                class="white-button"
+                onClick={() => {
+                  //takeToValidation();
+                  setView(0);
+                }}
+              >
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="ml-5 p-10 xl:basis-4/5">
+          {console.log(
+            "Before render :",
+            Products.length,
+            ProductsCategory.length
+          )}
+          {render_products(ProductsCategory)}
+        </div>
       </div>
+    );
+  }
+
+  console.log(view);
+  if(view == 0)
+  {
+    return (
+      <h1>Secondary view</h1>
+    );
+  }
+  else if(view == 1)
+  {
+    return (
+    <div>
+    {render_app()}
     </div>
-  );
+    );
+  }
+  else
+  {
+    return (
+      <div>
+      {Shop}
+      </div>
+      );
+  }
+
 }; //end App
