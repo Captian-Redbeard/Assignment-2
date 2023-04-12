@@ -1,19 +1,63 @@
 import "./App.css";
 import logo from "./logo.png";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import items from "./Cats.json";
 import { Products } from "./Products";
 import { Categories } from "./Categories";
-import Shop from "./Shop";
+
 export const App = () => {
 
   console.log("Step 1: After reading file :");
   const [ProductsCategory, setProductsCategory] = useState(Products);
   const [query, setQuery] = useState("");
   const [view, setView] = useState(1);
-  var viewState = 2;
+  const [cart, setCart] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
   // var ProductsCategory = Products;
 
 
+  //SHOP FUNCTIONS
+  useEffect(() => {
+    total();
+  }, [cart]);
+  
+  const total = () => {
+    let totalVal = 0;
+    for (let i = 0; i < cart.length; i++) {
+      totalVal += cart[i].price;
+    }
+    setCartTotal(totalVal);
+  };
+  
+  const addToCart = (el) => {
+    setCart([...cart, el]);
+  };
+  const removeFromCart = (el) => {
+    let hardCopy = [...cart];
+    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
+    setCart(hardCopy);
+  };
+  
+  const cartItems = cart.map((el) => (
+    <div key={el.id}>
+      <img class="img-fluid" src={el.image} width={30} />
+      {el.title}${el.price}
+    </div>
+  ));
+  const listItems = items.map((el) => (
+    <div key={el.id}>
+      <img class="img-fluid" src={el.image} width = {100} />
+      {el.title}
+      {el.category}
+      {el.price}
+      <button type="button" onClick={() => removeFromCart(el)}>-</button>{" "}
+      <button type="button" variant="light" onClick={() => addToCart(el)}>{" "}+{" "}</button>
+    </div>
+  ));
+  //--------------------------
+
+  
+  //APP Functions
   const render_products = (ProductsCategory) => {
     return (
       <div className="category-section fixed">
@@ -103,6 +147,18 @@ export const App = () => {
     setProductsCategory(results);
   };
 
+  //Renders
+  const render_shop = () => {
+    return (
+      <div>
+        {" "}
+        {listItems}
+        <div>Itesm in Cart :</div>
+        <div>{cartItems}</div>
+        <div>Order total to pay :{cartTotal}</div>
+      </div>
+    );
+    }
 
   const render_app = () => {
     return (
@@ -156,7 +212,7 @@ export const App = () => {
                 class="white-button"
                 onClick={() => {
                   //takeToValidation();
-                  setView(0);
+                  setView(2);
                 }}
               >
                 Checkout
@@ -195,6 +251,7 @@ export const App = () => {
   {
     return (
       <div>
+        {render_shop()}
       </div>
       );
   }

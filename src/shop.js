@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import items from "./Cats.json";
+
 const Shop = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
@@ -42,6 +43,7 @@ const Shop = () => {
     </div>
   ));
 
+  const render_shop = () => {
   return (
     <div>
       {" "}
@@ -49,6 +51,13 @@ const Shop = () => {
       <div>Itesm in Cart :</div>
       <div>{cartItems}</div>
       <div>Order total to pay :{cartTotal}</div>
+    </div>
+  );
+  }
+
+  return (
+    <div>
+      {render_shop()}
     </div>
   );
 };
