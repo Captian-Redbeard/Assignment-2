@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import items from "./ForTesting.json";
+import items from "./Cats.json";
 const Shop = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
