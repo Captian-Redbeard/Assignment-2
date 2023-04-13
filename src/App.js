@@ -4,11 +4,6 @@ import React, { useState, useEffect } from "react";
 import items from "./Cats.json";
 import { Products } from "./Products";
 import { Categories } from "./Categories";
-<<<<<<< HEAD
-import Shop from "./shop";
-=======
-
->>>>>>> d7c06e9d7d5604421fbe2a13c62f3d5bd9821d7e
 export const App = () => {
 
   console.log("Step 1: After reading file :");
