@@ -39,16 +39,8 @@
 
 .white-button{
   background-color: white;
-  border-radius: 10px;
+  border-radius: 50%;
   color: black;
   font-size: 16px;
   padding: 12px 24px;
-}
-
-.gray-button-small{
-  background-color: rgb(170, 170, 170);
-  border-radius: 10px;
-  color: black;
-  font-size: 14px;
-  padding: 2px 20px;
 }
