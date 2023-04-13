@@ -55,6 +55,11 @@ export const App = () => {
       <button type="button" variant="light" onClick={() => addToCart(el)}>{" "}+{" "}</button>
     </div>
   ));
+
+  function howManyofThis(id) {
+    let hmot = cart.filter((cartItem) => cartItem.id === id);
+    return hmot.length;
+  }
   //--------------------------
 
   
@@ -117,7 +122,7 @@ export const App = () => {
           {ProductsCategory.map((product, index) => (
             <div key={index} className="group relative shadow-lg">
               <div
-                className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none"
+                className="min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:aspect-none group-hover:-translate-y-2 h-auto"
               >
                 <img
                   alt="Product Image"
@@ -136,7 +141,7 @@ export const App = () => {
                     <p>Tag - {product.category}</p>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">
-                    Rating:
+                    Rating: {" "}
                     {product.rating.rate}
                   </p>
                 </div>
@@ -145,6 +150,11 @@ export const App = () => {
                 >
                   ${product.price}
                 </p>
+              </div>
+              <div className="flex justify-between p-3">
+              <button class="small-gray-button" type="button" onClick={() => removeFromCart(cartItems)}>-</button>
+              <p className="mt-1 text-sm text-gray-500">{howManyofThis(product.id)}</p>
+              <button type="button" variant="light" onClick={() => addToCart(cartItems)}>+</button>
               </div>
             </div>
           ))}
@@ -158,9 +168,12 @@ export const App = () => {
       <div>
         {" "}
         {listItems}
-        <div>Itesm in Cart :</div>
+        <div>Items in Cart :</div>
         <div>{cartItems}</div>
         <div>Order total to pay :{cartTotal}</div>
+        <a href="./FormValidation.html">
+          <button class="gray-button-small">Confirm</button>
+        </a>
       </div>
     );
     }
@@ -192,7 +205,7 @@ export const App = () => {
             <p className="text-gray-700 text-white">
               by -{" "}
               <b style={{ color: "orange" }}>
-                Kyle Kohl: Software Engineer & Spencer Theile: Software Engineer
+                Kyle Kohl: Software Engineer & Spencer Thiele: Software Engineer
               </b>
             </p>
             <div className="py-5">
@@ -248,6 +261,138 @@ export const App = () => {
   }
 
 
+  const render_validation = () => {
+    return (
+      <div>
+        <div class="container">
+
+        <div class="row">
+          <div class="col-2"></div>
+
+          <div class="col-8">
+
+            <h1>Checkout Form Validation</h1>
+
+            <div id="liveAlertPlaceholder"></div>
+
+            <form class="row g-3" id="checkout-form">
+
+              //full name
+              <div class="col-md-6">
+                <label for="inputName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="inputName"></input>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Must be like, "John Doe"
+                </div>
+              </div>
+
+              //Email
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail4"></input>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Must be like, "abc@xyz.efg"
+                </div>
+              </div>
+
+              //Credit Card
+              <div class="col-12">
+                <label for="inputCard" class="form-label">Card</label>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
+                  <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
+                    aria-label="Username" aria-describedby="basic-addon1"></input>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                    Must be like, "7777-7777-7777-7777"
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></input>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress2" class="form-label">Address 2</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" id="inputCity"></input>
+              </div>
+              <div class="col-md-4">
+                <label for="inputState" class="form-label">State</label>
+                <select id="inputState" class="form-select">
+                  <option selected>Choose...</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputZip" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="inputZip"></input>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck"></input>
+                  <label class="form-check-label" for="gridCheck">
+                    Check me out
+                  </label>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-success"> <i class="bi-bag-check"></i> Order</button>
+              </div>
+            </form>
+
+
+            <div class="card collapse" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Order summary</h5>
+                <p class="card-text">Here is a summary of your order.</p>
+              </div>
+              <ul class="list-group list-group-flush">
+
+              </ul>
+              <a href="" onclick="location.reload()" class="btn btn-secondary"> <i class="bi-arrow-left-circle"></i>
+                Return</a>
+            </div>
+
+
+            <footer class="bd-footer py-4 py-md-5 mt-5 bg-light">
+              <div class="container py-4 py-md-5 px-4 px-md-3">
+                <div class="row">
+                  <div class="col-lg-12 mb-3">
+                    <b>SE/Com-S 319</b> Javascript form validation.
+                  </div>
+
+                </div>
+              </div>
+            </footer>
+
+          </div>
+
+          <div class="col-2"></div>
+
+
+        </div>
+
+        </div>
+
+        <script type="text/javascript" src="script.js"></script>
+
+      </div>
+    );
+  }
+
+
 
   //Render Choice
   if(view == 0)
@@ -260,17 +405,21 @@ export const App = () => {
   {
     return (
     <div>
-    {render_app()}
+      {render_app()}
     </div>
     );
   }
-  else
+  else if(view == 2)
   {
     return (
       <div>
         {render_shop()}
       </div>
       );
+  }
+  else if(view == 3)
+  {
+    
   }
 
 }; //end App

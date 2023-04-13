@@ -1,3 +1,5 @@
+const { hover } = require('@testing-library/user-event/dist/hover');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,5 +9,10 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  variants: {
+    extend: {
+      translateY: [hover],
+    }
+  },
 } 
 
