@@ -12,6 +12,7 @@ export const App = () => {
   const [view, setView] = useState(1);
   const [ProductsUnfiltered, setProductsUnfiltered] = useState(Products);
   const [cart, setCart] = useState([]);
+  const [singleCart, setCartSingle] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   
 
@@ -28,10 +29,32 @@ export const App = () => {
     }
     setCartTotal(totalVal);
   };
-  
+
+  function inSingle(el) {
+    for(let i = 0; i < singleCart.length; i++)
+    {
+      if(el.id == singleCart[i].id)
+      {
+        return true;
+      }
+    }
+    return false;
+  };
+
   const addToCart = (el) => {
     setCart([...cart, el]);
+    if(!inSingle(el))
+    {
+      addToSingleCart(el);
+    }
   };
+
+  const addToSingleCart = (el) => {
+    setCartSingle([...singleCart, el]);
+  };
+
+  
+  
   const removeFromCart = (el) => {
         let itemFound = false;
         const updatedCart = cart.filter((cartItem) => {
@@ -45,15 +68,15 @@ export const App = () => {
           setCart(updatedCart);
         }
       }
-  
-  const cartItems = cart.map((el) => (
+
+  const cartItems = singleCart.map((el) => (
     <div>
     <div key={el.id} className="relative py-0 border-black border-solid border-4 m-4 grid grid-cols-3 bg-orange-100 overscroll-y-auto place-items-center">
       <div className="">
         <img class="img-fluid m-10 m-10 border-white border-solid border-8 border-dotted" src={el.image} width={300} />
       </div>
       <div className="text-1xl text-center font-medium tracking-tight text-black-600 ">
-      {howManyofThis(el.id)} {el.title}<br></br>${el.price}
+      {howManyofThis(el.id)} {el.title}<br></br>Total: ${el.price * howManyofThis(el.id)}
       </div>
     </div>
     <div>
@@ -80,6 +103,7 @@ export const App = () => {
 
   
   //APP Functions
+
   function handleClick(tag) {
     console.log("Step 4 : in handleClick", tag);
     let filtered = Products.filter((cat) => cat.category === tag);
@@ -91,15 +115,6 @@ export const App = () => {
   function clearFilter() {
     setProductsCategory(ProductsUnfiltered);
     setQuery("");
-  }
-
-
-  function takeToValidation() {
-    window.location.href = "FormValidation.html";
-    setTimeout(() => {
-      console.log("Delayed message!");
-    }, 10000);
-    
   }
 
 
@@ -182,14 +197,6 @@ export const App = () => {
     );
   };
 
-  const render_button = () => {
-    return (
-      <div>
-        <button>Button</button>
-      </div>
-    )
-  }
-
   const render_shop = () => {
     return (
       <div>
@@ -203,8 +210,13 @@ export const App = () => {
           </h2>
         </div>
         <div>{cartItems}</div>
-        <div>Order total to pay :{cartTotal}</div>
+        <div>
+          <p className="px-5 text-3xl font-medium tracking-tight text-black-600">
+            Order total to pay : {Number((cartTotal).toFixed(2))}
+          </p>
           <button class="gray-button-small" onClick={() => setView(3)}>Confirm</button>
+        </div>
+          
       </div>
     );
     }
@@ -213,7 +225,7 @@ export const App = () => {
     return (
       <div className="flex fixed flex-row">
         {console.log("Step 2 : ReturnApp :", Products.length, ProductsCategory.length)}
-        <div className="h-screen bg-slate-800 p-3 xl:basis-1/5 overscroll-y-auto" style={{ minWidth: "65%" }}>
+        <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: "65%" }}>
           <img
             style={{ borderRadius: "10px" }}
             src={logo}
