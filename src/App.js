@@ -166,7 +166,7 @@ export const App = () => {
               
             </div>
             <div className="flex justify-between p-3">
-                <button class="small-gray-button" type="button" onClick={() => clickMe()}>-</button>
+                <button class="small-gray-button" type="button" onClick={() => removeFromCart(product)}>-</button>
                 <p className="mt-1 text-sm text-gray-500">{howManyofThis(product.id)}</p>
                 <button type="button" variant="light" onClick={() => addToCart(product)}>+</button>
               </div>
