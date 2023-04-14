@@ -106,7 +106,7 @@ export const App = () => {
       " QueryValue :",
       query
     );
-    const results = ProductsCategory.filter((eachProduct) => {
+    const results = Products.filter((eachProduct) => {
       if (e.target.value === "") return ProductsCategory;
       return eachProduct.title
         .toLowerCase()
