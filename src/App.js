@@ -131,15 +131,8 @@ export const App = () => {
         >
           {/* Loop Products */}
           {ProductsCategory.map((product, index) => (
+            <div>
             <div key={index} className="relative shadow-lg">
-              <button
-                class="gray-button-small"
-                onClick={() => {
-                  clearFilter();
-                }}
-              >
-                Clear Filters
-              </button>
               <div
                 className="min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:aspect-none group-hover:-translate-y-2 h-auto"
               >
@@ -170,7 +163,9 @@ export const App = () => {
                   ${product.price}
                 </p>
               </div>
-              <div className="flex justify-between p-3">
+              
+            </div>
+            <div className="flex justify-between p-3">
                 <button class="small-gray-button" type="button" onClick={() => clickMe()}>-</button>
                 <p className="mt-1 text-sm text-gray-500">{howManyofThis(product.id)}</p>
                 <button type="button" variant="light" onClick={() => addToCart(product)}>+</button>
