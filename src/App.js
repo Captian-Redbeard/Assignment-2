@@ -214,7 +214,7 @@ export const App = () => {
           <p className="px-5 text-3xl font-medium tracking-tight text-black-600">
             Order total to pay : {Number((cartTotal).toFixed(2))}
           </p>
-          <button class="gray-button-small" onClick={() => setView(3)}>Confirm</button>
+          <button class="gray-button-small" onClick={() => setView(3)}>Confirm</button><button class="gray-button-small" onClick={() => setView(1)}>Return</button>
         </div>
           
       </div>
@@ -425,6 +425,14 @@ export const App = () => {
 
       </div>
     );
+  }
+
+  const render_receipt = () => {
+    return (
+      <div>
+
+      </div>
+    )
   }
 
 
