@@ -213,7 +213,7 @@ export const App = () => {
     return (
       <div className="flex fixed flex-row">
         {console.log("Step 2 : ReturnApp :", Products.length, ProductsCategory.length)}
-        <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: "65%" }}>
+        <div className="h-screen bg-slate-800 p-3 xl:basis-1/5 overscroll-y-auto" style={{ minWidth: "65%" }}>
           <img
             style={{ borderRadius: "10px" }}
             src={logo}
