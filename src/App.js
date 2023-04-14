@@ -47,9 +47,18 @@ export const App = () => {
       }
   
   const cartItems = cart.map((el) => (
-    <div key={el.id}>
-      <img class="img-fluid" src={el.image} width={30} />
-      {el.title}${el.price}
+    <div>
+    <div key={el.id} className="relative py-0 border-black border-solid border-4 m-4 grid grid-cols-3 bg-orange-100 overscroll-y-auto place-items-center">
+      <div className="">
+        <img class="img-fluid m-10 m-10 border-white border-solid border-8 border-dotted" src={el.image} width={300} />
+      </div>
+      <div className="text-1xl text-center font-medium tracking-tight text-black-600 ">
+      {howManyofThis(el.id)} {el.title}<br></br>${el.price}
+      </div>
+    </div>
+    <div>
+      <br></br>
+    </div>
     </div>
   ));
   const listItems = items.map((el) => (
@@ -82,10 +91,6 @@ export const App = () => {
   function clearFilter() {
     setProductsCategory(ProductsUnfiltered);
     setQuery("");
-  }
-
-  function clickMe() {
-    console.log("Clicked");
   }
 
 
@@ -189,13 +194,17 @@ export const App = () => {
     return (
       <div>
         {" "}
-        {listItems}
-        <div>Items in Cart :</div>
+        {/*{listItems}*/}
+        <div>
+        <h2
+          className="text-3xl font-extrabold tracking-tight text-black-600 category-title"
+        >
+            Items in Cart :
+          </h2>
+        </div>
         <div>{cartItems}</div>
         <div>Order total to pay :{cartTotal}</div>
-        <a href="./FormValidation.html">
-          <button class="gray-button-small">Confirm</button>
-        </a>
+          <button class="gray-button-small" onClick={() => setView(3)}>Confirm</button>
       </div>
     );
     }
@@ -362,12 +371,12 @@ export const App = () => {
                 </div>
               </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-success"> <i class="bi-bag-check"></i> Order</button>
+                <button type="submit" class="btn btn-success" onClick={() => setView(1)}> <i class="bi-bag-check"></i> Order</button>
               </div>
             </form>
 
 
-            <div class="card collapse" style="width: 18rem;">
+            <div class="card collapse" style={{width: "18rem"}}>
               <div class="card-body">
                 <h5 class="card-title">Order summary</h5>
                 <p class="card-text">Here is a summary of your order.</p>
@@ -433,7 +442,11 @@ export const App = () => {
   }
   else if(view == 3)
   {
-    
+    return (
+      <div>
+        {render_validation()}
+      </div>
+      );
   }
 
 }; //end App
