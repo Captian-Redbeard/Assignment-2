@@ -76,6 +76,10 @@ export const App = () => {
     setQuery("");
   }
 
+  function clickMe() {
+    console.log("Clicked");
+  }
+
 
   function takeToValidation() {
     window.location.href = "FormValidation.html";
@@ -151,9 +155,9 @@ export const App = () => {
                 </p>
               </div>
               <div className="flex justify-between p-3">
-              <button class="small-gray-button" type="button" onClick={() => removeFromCart(cartItems)}>-</button>
-              <p className="mt-1 text-sm text-gray-500">{howManyofThis(product.id)}</p>
-              <button type="button" variant="light" onClick={() => addToCart(cartItems)}>+</button>
+                <button class="small-gray-button" type="button" onClick={() => clickMe()}>-</button>
+                <p className="mt-1 text-sm text-gray-500">{howManyofThis(product.id)}</p>
+                <button type="button" variant="light" onClick={() => addToCart(product)}>+</button>
               </div>
             </div>
           ))}
