@@ -33,10 +33,18 @@ export const App = () => {
     setCart([...cart, el]);
   };
   const removeFromCart = (el) => {
-    let hardCopy = [...cart];
-    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
-    setCart(hardCopy);
-  };
+        let itemFound = false;
+        const updatedCart = cart.filter((cartItem) => {
+          if (cartItem.id === el.id && !itemFound) {
+            itemFound = true;
+            return false;
+          }
+          return true;
+        });
+        if (itemFound) {
+          setCart(updatedCart);
+        }
+      }
   
   const cartItems = cart.map((el) => (
     <div key={el.id}>
@@ -123,7 +131,15 @@ export const App = () => {
         >
           {/* Loop Products */}
           {ProductsCategory.map((product, index) => (
-            <div key={index} className="group relative shadow-lg">
+            <div key={index} className="relative shadow-lg">
+              <button
+                class="gray-button-small"
+                onClick={() => {
+                  clearFilter();
+                }}
+              >
+                Clear Filters
+              </button>
               <div
                 className="min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:aspect-none group-hover:-translate-y-2 h-auto"
               >
@@ -166,6 +182,14 @@ export const App = () => {
     );
   };
 
+  const render_button = () => {
+    return (
+      <div>
+        <button>Button</button>
+      </div>
+    )
+  }
+
   const render_shop = () => {
     return (
       <div>
@@ -184,15 +208,8 @@ export const App = () => {
   const render_app = () => {
     return (
       <div className="flex fixed flex-row">
-        {console.log(
-          "Step 2 : ReturnApp :",
-          Products.length,
-          ProductsCategory.length
-        )}
-        <div
-          className="h-screen bg-slate-800 p-3 xl:basis-1/5"
-          style={{ minWidth: "65%" }}
-        >
+        {console.log("Step 2 : ReturnApp :", Products.length, ProductsCategory.length)}
+        <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: "65%" }}>
           <img
             style={{ borderRadius: "10px" }}
             src={logo}
@@ -242,7 +259,6 @@ export const App = () => {
               <button
                 class="white-button"
                 onClick={() => {
-                  //takeToValidation();
                   setView(2);
                 }}
               >
